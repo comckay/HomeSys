@@ -23,7 +23,6 @@ Process date;
 const String GOOGLE_USERNAME = "xxxxx@gmail.com";
 const String GOOGLE_PASSWORD = "xxxx";
 const String SPREADSHEET_TITLE = "xxxxx";
-const String TO_EMAIL_ADDRESS = "xxxx@xx.com";
 
 // Include required libraries
 #include "DHT.h"
