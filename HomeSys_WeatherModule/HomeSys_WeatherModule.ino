@@ -9,7 +9,8 @@
 #include "TembooAccount.h" 
 
 // Variables
-int lightLevel;
+int lightLeveloutside;
+int lightLevelinside;
 float humidity;
 float temperature;
 unsigned long time;
@@ -20,9 +21,10 @@ float temperature_limit;
 Process date;
 
 // Your Google Docs data
-const String GOOGLE_USERNAME = "xxxxx@gmail.com";
-const String GOOGLE_PASSWORD = "xxxx";
-const String SPREADSHEET_TITLE = "xxxxx";
+const String GOOGLE_USERNAME = "mckay.connor.t@gmail.com";
+const String GOOGLE_PASSWORD = "kfypuvddkcjietkc";
+const String SPREADSHEET_TITLE = "WeatherStation1";
+const String TO_EMAIL_ADDRESS = "mckay.connor.t@gmail.com";
 
 // Include required libraries
 #include "DHT.h"
@@ -85,8 +87,11 @@ void loop() {
    // Read temperature as Fahrenheit
    float temperature = dht.readTemperature(true);
     
-  // Measure light level
-  int lightLevel = analogRead(A0);
+  // Measure light level outside
+  int lightLeveloutside = analogRead(A0);
+  
+  // Measure light level inside
+  int lightLevelinside = analogRead(A1);
   
   // Compute heat index
     // Must send in temp in Fahrenheit!
@@ -108,7 +113,7 @@ void loop() {
   }
   
   // Append data to Google Docs sheet
-  runAppendRow(humidity, lightLevel, temperature, hi, humidityinside, temperatureinside, hiinside);
+  runAppendRow(humidity, lightLeveloutside, temperature, hi, humidityinside, temperatureinside, hiinside, lightLevelinside);
   
         
   // Repeat every x minutes
@@ -116,12 +121,12 @@ void loop() {
 }
 
 // Function to add data to Google Docs
-void runAppendRow(float humidity, int lightLevel, float temperature, float hi, float humidityinside, float temperatureinside, float hiinside) {
+void runAppendRow(float humidity, int lightLeveloutside, float temperature, float hi, float humidityinside, float temperatureinside, float hiinside, int lightLevelinside) {
   TembooChoreo AppendRowChoreo;
 
   // Invoke the Temboo client
   AppendRowChoreo.begin();
-
+ 
   // Set Temboo account credentials
   AppendRowChoreo.setAccountName(TEMBOO_ACCOUNT);
   AppendRowChoreo.setAppKeyName(TEMBOO_APP_KEY_NAME);
@@ -151,7 +156,7 @@ void runAppendRow(float humidity, int lightLevel, float temperature, float hi, f
   
   // Format data
   String data = "";
-  data = data + timeString + "," + String(humidity) + "," + String(lightLevel) + "," + String(temperature) + "," + String(hi) + "," + String(humidityinside) + "," + String(temperatureinside) + "," + String(hiinside);
+  data = data + timeString + "," + String(humidity) + "," + String(lightLeveloutside) + "," + String(temperature) + "," + String(hi) + "," + String(humidityinside) + "," + String(temperatureinside) + "," + String(hiinside) + "," + String(lightLevelinside);
 
   // Set Choreo inputs
   AppendRowChoreo.addInput("RowData", data);
@@ -175,4 +180,5 @@ void runAppendRow(float humidity, int lightLevel, float temperature, float hi, f
   }
   AppendRowChoreo.close();
 }
+
 
