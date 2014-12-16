@@ -21,10 +21,10 @@ float temperature_limit;
 Process date;
 
 // Your Google Docs data
-const String GOOGLE_USERNAME = "mckay.connor.t@gmail.com";
-const String GOOGLE_PASSWORD = "kfypuvddkcjietkc";
-const String SPREADSHEET_TITLE = "WeatherStation1";
-const String TO_EMAIL_ADDRESS = "mckay.connor.t@gmail.com";
+const String GOOGLE_USERNAME = "xxxxxx";
+const String GOOGLE_PASSWORD = "xxxxxx";
+const String SPREADSHEET_TITLE = "xxxxx";
+const String TO_EMAIL_ADDRESS = "xxxxx";
 
 // Include required libraries
 #include "DHT.h"
