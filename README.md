@@ -8,7 +8,7 @@ yun-weather-temboo
 ==================
 Marco Schwartz 
 
-This project uses the Arduino Yun to measure temperature and light level data & store it within a Google Docs spreadsheet using the web service Temboo.
+This project uses the Arduino Yun to measure temperature and light level data & store this data within a Google Docs spreadsheet using the web service Temboo.
 
 You can find the article on the Open Home Automation website:
 
